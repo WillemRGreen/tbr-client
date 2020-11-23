@@ -1,0 +1,16 @@
+
+.AddFolder {
+    color: #dedede;
+  }
+  
+  .AddFolder h2 {
+    margin-left: 16px;
+  }
+  
+  .lighter {
+    color:red
+  }
+  
+  .error-message{
+    border:solid 2px red;
+  }

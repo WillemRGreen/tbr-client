@@ -1,0 +1,49 @@
+.generic-form {
+    background-color: #131200;
+    color: #dedede;
+    padding: 16px;
+    max-width: 332px;
+  }
+  
+  .generic-form label {
+    display: block;
+    font-size: 16px;
+    padding-bottom: 8px;
+  }
+  
+  .generic-form input,
+  .generic-form textarea,
+  .generic-form select {
+    font-size: 14px;
+    padding: 8px;
+    width: 300px;
+  }
+  
+  .generic-form select {
+    height: 33px;
+  }
+  
+  .generic-form > .field {
+    margin-bottom: 16px;
+  }
+  .generic-form > .buttons {
+    margin-top: 26px;
+  }
+  
+  .generic-form button {
+    background-color: #131200;
+    border-radius: 4px;
+    border: 0;
+    color: #cacaca;
+    display: block;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 8px;
+    text-align: center;
+    text-decoration: none;
+  }
+  .generic-form button[type="submit"]:hover {
+    background-color: #29862e;
+    color: white;
+  }
+  

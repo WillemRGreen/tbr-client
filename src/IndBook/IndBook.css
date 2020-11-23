@@ -1,0 +1,27 @@
+
+.Book {
+    --note-height: 88px;
+    background-color: #131200;
+    color: #cacaca;
+    height: var(--book-height);
+    margin-bottom: 8px;
+    max-width: 380px;
+    padding: 8px 0 8px 8px;
+    position: relative;
+  }
+  
+  .Book__title {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px;
+    margin: 0;
+    max-width: 80%;
+    min-height: 24px;
+  }
+  .Book__title a {
+    color: #cacaca;
+    display: block;
+    text-decoration: none;
+  }
+  .Book__title a:hover {
+    color: #ff5f2f;
+  }
