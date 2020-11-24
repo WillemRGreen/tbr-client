@@ -1,7 +1,11 @@
 import React, { Component } from 'react'
 import { Route, Link } from 'react-router-dom'
 import BookListMain from './BookListMain/BookListMain'
+import BookPageNav from './BookPageNav/BookPageNav'
 import IndFolder from './IndFolder/IndFolder'
+import AddBookPage from './AddBookPage/AddBookPage'
+import AddFolderPage from './AddFolderPage/AddFolderPage'
+import BookPage from './BookPage/BookPage'
 import ApiContext from './ApiContext'
 import config from './config'
 import './App.css'
@@ -100,15 +104,15 @@ class App extends Component {
         )}
         <Route
           path='/book/:bookId'
-          component={BookPageMain}
+          component={BookPage}
         />
         <Route
           path='/add-folder'
-          component={AddFolder}
+          component={AddFolderPage}
         />
         <Route
           path='/add-book'
-          component={AddBook}
+          component={AddBookPage}
         />
       </>
     )

@@ -1,0 +1,13 @@
+
+.BookPage {
+    background-color: #efefef;
+    height: 100%;
+    padding: 10px;
+    width: 100%;
+  }
+  
+  .BookPage__content {
+    color: #131200;
+    max-width: 380px;
+  }
+  
