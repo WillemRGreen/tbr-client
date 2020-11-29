@@ -3,7 +3,9 @@ import React from 'react'
 export default React.createContext({
   notes: [],
   folders: [],
+  user_name: '',
   addFolder: () => {},
-  addNote: () => {},
-  deleteNote: () => {},
+  addBook: () => {},
+  deleteBook: () => {},
+  changeUsername: () => {}
 })

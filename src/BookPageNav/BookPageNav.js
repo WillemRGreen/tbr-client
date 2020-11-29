@@ -3,7 +3,7 @@ import ApiContext from '../ApiContext'
 import { findBook, findFolder } from '../books-helpers'
 import './BookPageNav.css'
 
-export default class BookPageNav extends React.Component {
+export default class BookPageNav extends Component {
   static defaultProps = {
     history: {
       goBack: () => { }

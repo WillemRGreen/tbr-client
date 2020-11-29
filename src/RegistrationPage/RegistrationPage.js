@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import AuthApiService from './services/auth-api-service'
+import AuthApiService from '../services/auth-api-service'
 
 export default class RegistrationPage extends Component {
   static defaultProps = {
@@ -17,6 +17,9 @@ export default class RegistrationPage extends Component {
       user_name: user_name.value,
       password: password.value,
       full_name: full_name.value,
+    })
+    .then(user => {
+        this.setState({user_name: user_name})
     })
       .then(user => {
         full_name.value = ''

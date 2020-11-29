@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import GenericForm from './GenericForm/GenericForm'
+import GenericForm from '../GenericForm/GenericForm'
 import ApiContext from '../ApiContext'
-import config from '../config'
+import ApiService from '../services/api-service'
+import TokenService from '../services/token-service'
 import './AddBookPage.css'
 
 export default class AddBookPage extends Component {
@@ -28,20 +29,9 @@ export default class AddBookPage extends Component {
           name: e.target['book-name'].value,
           description: e.target['book-description'].value,
           folder_id: e.target['book-folder-id'].value,
-          modified: new Date(),
+          user_id: TokenService.getAuthToken()
         }
-        fetch(`${config.API_ENDPOINT}/api/books`, {
-          method: 'POST',
-          headers: {
-            'content-type': 'application/json'
-          },
-          body: JSON.stringify(newBook),
-        })
-          .then(res => {
-            if (!res.ok)
-              return res.json().then(e => Promise.reject(e))
-            return res.json()
-          })
+        ApiService.postBook(newBook.name, newBook.description, newBook.folder_id, newBook.user_id)
           .then(book => {
             this.context.addBook(book)
             this.props.history.push(`/folder/${book.folder_id}`)

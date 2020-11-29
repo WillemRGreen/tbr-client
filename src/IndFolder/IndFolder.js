@@ -7,7 +7,7 @@ export default class IndFolder extends React.Component {
   static contextType = ApiContext;
 
   render() {
-    const { folders=[], notes=[] } = this.context
+    const { folders=[]} = this.context
     return (
       <div className='IndFolder'>
         <ul className='IndFolder__list'>

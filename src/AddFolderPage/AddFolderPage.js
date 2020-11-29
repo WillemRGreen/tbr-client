@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import NotefulForm from '../NotefulForm/NotefulForm'
 import ApiContext from '../ApiContext'
-import config from '../config'
-import './AddFolder.css'
+import ApiService from '../services/api-service'
+import GenericForm from '../GenericForm/GenericForm'
+import './AddFolderPage.css'
 
 export default class AddFolder extends Component {
   static defaultProps = {
@@ -23,18 +23,7 @@ export default class AddFolder extends Component {
       const folder = {
         name: e.target['folder-name'].value
       }
-      fetch(`${config.API_ENDPOINT}/api/folders`, {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json'
-        },
-        body: JSON.stringify(folder),
-      })
-        .then(res => {
-          if (!res.ok)
-            return res.json().then(e => Promise.reject(e))
-          return res.json()
-        })
+      ApiService.postFolder(folder.name)
         .then(folder => {
           this.context.addFolder(folder)
           this.props.history.push(`/folder/${folder.id}`)
@@ -68,7 +57,7 @@ export default class AddFolder extends Component {
     return (
       <section className='AddFolder'>
         <h2>Create a folder</h2>
-        <NotefulForm onSubmit={this.handleSubmit}>
+        <GenericForm onSubmit={this.handleSubmit}>
           <div className='field'>
             <label htmlFor='folder-name-input'>
               Name
@@ -80,7 +69,7 @@ export default class AddFolder extends Component {
               Add folder
             </button>
           </div>
-        </NotefulForm>
+        </GenericForm>
       </section>
     )
   }

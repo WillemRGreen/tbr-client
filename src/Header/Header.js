@@ -1,7 +1,7 @@
-import { render } from '@testing-library/react'
 import React, { Component } from 'react'
-import TokenService from '../../services/token-service'
+import TokenService from '../services/token-service'
 import { Link } from 'react-router-dom'
+import './Header.css'
 
 export default class Header extends Component {
     handleLogoutClick = () => {
@@ -27,7 +27,7 @@ export default class Header extends Component {
             to='/register'>
             Register
           </Link>
-          
+
           <Link
             to='/login'>
             Log in

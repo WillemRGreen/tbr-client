@@ -1,43 +1,44 @@
 import React, { Component } from 'react'
-import { Route, Link } from 'react-router-dom'
+import { Route } from 'react-router-dom'
+import Header from './Header/Header'
+import PrivateRoute from './Utils/PrivateRoute'
+import PublicOnlyRoute from './Utils/PublicOnlyRoute'
+import LoginPage from './LoginPage/LoginPage'
+import RegistrationPage from './RegistrationPage/RegistrationPage'
+import LandingPage from './LandingPage/LandingPage'
+//import NotFoundPage from './NotFoundPage/NotFoundPage'
 import BookListMain from './BookListMain/BookListMain'
 import BookPageNav from './BookPageNav/BookPageNav'
 import IndFolder from './IndFolder/IndFolder'
+import ApiService from './services/api-service'
 import AddBookPage from './AddBookPage/AddBookPage'
 import AddFolderPage from './AddFolderPage/AddFolderPage'
 import BookPage from './BookPage/BookPage'
 import ApiContext from './ApiContext'
-import config from './config'
 import './App.css'
 
 class App extends Component {
   state = {
     books: [],
     folders: [],
+    user_name: ''
   };
 
   componentDidMount() {
-    Promise.all([
-      fetch(`${config.API_ENDPOINT}/api/books`),
-      fetch(`${config.API_ENDPOINT}/api/folders`)
-    ])
-      .then(([booksRes, foldersRes]) => {
-        if (!booksRes.ok)
-          return booksRes.json().then(e => Promise.reject(e))
-        if (!foldersRes.ok)
-          return foldersRes.json().then(e => Promise.reject(e))
-
-        return Promise.all([
-          booksRes.json(),
-          foldersRes.json(),
-        ])
-      })
-      .then(([books, folders]) => {
-        this.setState({ books, folders })
+    ApiService.getFolders()
+      .then((folders) => {
+        this.setState({ folders })
       })
       .catch(error => {
         console.error({ error })
       })
+    ApiService.getBooks()
+    .then((books) => {
+      this.setState({ books })
+    })
+    .catch(error => {
+      console.error({ error })
+    })
   }
 
   handleAddFolder = folder => {
@@ -58,6 +59,10 @@ class App extends Component {
     })
   }
 
+  handleUsernameStorage = user_name => {
+    this.setState({user_name: user_name})
+  }
+
   handleDeleteBook = bookId => {
     this.setState({
       books: this.state.books.filter(book => book.id !== bookId)
@@ -68,25 +73,40 @@ class App extends Component {
     return (
       <>
         {['/', '/folder/:folderId'].map(path =>
-          <Route
+          <PrivateRoute
             exact
             key={path}
             path={path}
             component={IndFolder}
           />
         )}
-        <Route
+        <PublicOnlyRoute
+          path={'/login'}
+          component={LoginPage}
+        />
+        <PublicOnlyRoute
+          path={'/register'}
+          component={RegistrationPage}
+        />
+        <PrivateRoute
           path='/book/:bookId'
           component={BookPageNav}
         />
-        <Route
+        <PrivateRoute
           path='/add-folder'
           component={BookPageNav}
         />
-        <Route
+        <PrivateRoute
           path='/add-book'
           component={BookPageNav}
         />
+        <Route 
+          path={'/landing-page'}
+          component={LandingPage}
+        />
+        {/* <Route
+          component={NotFoundPage}
+        /> */}
       </>
     )
   }
@@ -95,22 +115,22 @@ class App extends Component {
     return (
       <>
         {['/', '/folder/:folderId'].map(path =>
-          <Route
+          <PrivateRoute
             exact
             key={path}
             path={path}
             component={BookListMain}
           />
         )}
-        <Route
+        <PrivateRoute
           path='/book/:bookId'
           component={BookPage}
         />
-        <Route
+        <PrivateRoute
           path='/add-folder'
           component={AddFolderPage}
         />
-        <Route
+        <PrivateRoute
           path='/add-book'
           component={AddBookPage}
         />
@@ -122,9 +142,11 @@ class App extends Component {
     const value = {
       books: this.state.books,
       folders: this.state.folders,
+      user_name: this.state.user_name,
       addFolder: this.handleAddFolder,
       addBook: this.handleAddBook,
       deleteBook: this.handleDeleteBook,
+      changeUsername: this.handleUsernameStorage
     }
     return (
       <ApiContext.Provider value={value}>
@@ -133,10 +155,7 @@ class App extends Component {
             {this.renderNavRoutes()}
           </nav>
           <header className='App__header'>
-            <h1>
-              <Link to='/'>Your TBR</Link>
-              {' '}
-            </h1>
+            <Header />
           </header>
           <main className='App__main'>
             {this.renderMainRoutes()}

@@ -1,6 +1,6 @@
 .generic-form {
-    background-color: #131200;
-    color: #dedede;
+    background-color: #DBC1A9;
+    color: #131200;
     padding: 16px;
     max-width: 332px;
   }
@@ -31,10 +31,10 @@
   }
   
   .generic-form button {
-    background-color: #131200;
+    background-color: #DBC1A9;
     border-radius: 4px;
     border: 0;
-    color: #cacaca;
+    color: #131200;
     display: block;
     font-size: 18px;
     font-weight: bold;

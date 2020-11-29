@@ -1,0 +1,25 @@
+.add-book-button:hover {
+    background-color: #56675A;
+    color: white;
+  }
+
+
+.BookListMain ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 10px;
+  }
+  
+  .BookListMain__button-container {
+    max-width: 380px;
+    margin: 0 10px;
+  }
+  
+  .BookListMain__add-note-button {
+    margin: 0 auto 20px;
+  }
+  .BookListMain__add-note-button:hover {
+    background-color: #56675A;
+    color: white;
+  }
+  

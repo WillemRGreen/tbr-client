@@ -1,7 +1,6 @@
-import React from 'react'
+import React, {Component} from 'react'
 import { Link } from 'react-router-dom'
 import ApiContext from '../ApiContext'
-import config from '../config'
 import './IndBook.css'
 
 export default class IndBook extends Component {

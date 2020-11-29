@@ -1,7 +1,7 @@
 import React from 'react'
-import Book from './Book/Book'
-import ApiContext from './ApiContext'
-import { findBook } from './books-helpers'
+import Book from '../IndBook/IndBook'
+import ApiContext from '../ApiContext'
+import { findBook } from '../books-helpers'
 import './BookPage.css'
 
 export default class BookPageMain extends React.Component {

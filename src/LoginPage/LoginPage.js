@@ -1,13 +1,16 @@
 import React, { Component } from 'react'
-import TokenService from './services/token-service'
-import AuthApiService from './services/auth-api-service'
+import TokenService from '../services/token-service'
+import AuthApiService from '../services/auth-api-service'
+import ApiContext from '../ApiContext'
 
-export default class LoginForm extends Component {
+export default class LoginPage extends Component {
     static defaultProps = {
 
     }
 
     state = { error:null}
+
+    static contextType = ApiContext
 
     handleSubmitJwtAuth = ev => {
         ev.preventDefault()
@@ -24,6 +27,10 @@ export default class LoginForm extends Component {
             TokenService.saveAuthToken(res.authToken)
             this.props.onLoginSuccess()
           })
+        //   .then(user_name => {
+        //       this.context.changeUsername(user_name)
+        //       this.props.history.push('/')
+        //   })
           .catch(res => {
             this.setState({ error: res.error })
           })
