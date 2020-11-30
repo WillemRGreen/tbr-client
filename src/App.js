@@ -32,7 +32,7 @@ class App extends Component {
       .catch(error => {
         console.error({ error })
       })
-    ApiService.getBooks()
+      ApiService.getBooks()
     .then((books) => {
       this.setState({ books })
     })
