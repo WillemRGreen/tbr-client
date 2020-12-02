@@ -55,7 +55,7 @@ const ApiService = {
           : res.json()
       )
   },
-  postBook(folderId, description, name, user_id) {
+  postBook(name, folder_id, description, user_id) {
     return fetch(`${config.API_ENDPOINT}/api/books`, {
       method: 'POST',
       headers: {
@@ -63,9 +63,9 @@ const ApiService = {
         'authorization': `bearer ${TokenService.getAuthToken()}`,
       },
       body: JSON.stringify({
-        folderId: folderId,
-        description: description,
         name: name,
+        folder_id: folder_id,
+        description: description,
         user_id: user_id,
       }),
     })
