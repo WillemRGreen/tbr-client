@@ -1,33 +1,53 @@
 
-.IndFolder__list {
+.Folder__list {
     list-style-type: none;
-    margin: 130px 0 0;
+    margin: 130px 0 10px 20px;
     padding: 0;
+  }
+  .IndFolder__folder-link:hover {
+    color: white;
+    cursor: pointer;
+  }
+
+  .IndFolder__folder-link {
+    box-shadow: 0px 10px 14px -7px #40351E;
+    background:linear-gradient(to bottom, #3B311B 5%, #40351E 100%);
+    background-color:#AF8A68;
+    border-radius:4px;
+    border:1px solid #40351E;
+    display:inline-block;
+    cursor:pointer;
+    color:#cacaca;
+    font-family:Arial;
+    font-size:13px;
+    font-weight:bold;
+    padding:6px 12px;
+    text-decoration:none;
+    text-shadow:0px 1px 0px #131200;
+    height:30px;
+    width: 100px;
+    margin: 5px 0 5px 0;
   }
   
   .add-folder-button {
-    margin: 20px auto;
+    box-shadow: 0px 10px 14px -7px #40351E;
+    background:linear-gradient(to bottom, #3B311B 5%, #40351E 100%);
+    background-color:#AF8A68;
+    border-radius:4px;
+    border:1px solid #40351E;
+    display:inline-block;
+    cursor:pointer;
+    color:#cacaca;
+    font-family:Arial;
+    font-size:13px;
+    font-weight:bold;
+    padding:6px 12px;
+    text-decoration:none;
+    text-shadow:0px 1px 0px #131200;
+    margin: 5px 0 10px 30px
   }
+
   .add-folder-button:hover {
-    background-color: #56675A;
     color: white;
-  }
-  
-  .IndFolder__folder-link {
-    background-color: #40351E;
-    color: #b5b3b3;
-    display: block;
-    font-family: var(--custom-font);
-    font-size: 20px;
-    margin: 0 0 8px auto;
-    max-width: 180px;
-    padding: 8px 16px;
-    text-decoration: none;
-  }
-  .IndFolder__folder-link:hover {
-    color: red;
     cursor: pointer;
-  }
-  .IndFolder__folder-link.active {
-    background-color: #131200;
   }

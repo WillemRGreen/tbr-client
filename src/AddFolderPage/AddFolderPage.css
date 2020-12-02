@@ -5,6 +5,8 @@
   
   .AddFolder h2 {
     margin-left: 16px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    color: #2A240F;
   }
   
   .lighter {
@@ -14,3 +16,4 @@
   .error-message{
     border:solid 2px red;
   }
+

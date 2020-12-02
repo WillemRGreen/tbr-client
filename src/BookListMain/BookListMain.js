@@ -19,6 +19,15 @@ export default class BookListMain extends Component {
     const booksForFolder = getBooksForFolder(books, parseInt(folderId))
     return (
       <section className='BookListMain'>
+        <div>
+            <Link
+                to={`/add-book`}>
+                <button 
+                    className='add-book-button'>
+                    Add Book
+                </button>
+            </Link>
+        </div>
         <ul>
           {booksForFolder.map(book =>
             <li key={book.id}>
@@ -30,15 +39,6 @@ export default class BookListMain extends Component {
             </li>
           )}
         </ul>
-        <div>
-            <Link
-                to={`/add-book`}>
-                <button 
-                    className='add-book-button'>
-                    Add Book
-                </button>
-            </Link>
-        </div>
       </section>
     )
   }

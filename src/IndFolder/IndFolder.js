@@ -9,8 +9,8 @@ export default class IndFolder extends React.Component {
   render() {
     const { folders=[]} = this.context
     return (
-      <div className='IndFolder'>
-        <ul className='IndFolder__list'>
+      <div className='Folder'>
+        <ul className='Folder__list'>
           {folders.map(folder =>
             <li key={folder.id}>
               <NavLink

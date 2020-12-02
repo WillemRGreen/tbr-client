@@ -9,6 +9,8 @@
     display: block;
     font-size: 16px;
     padding-bottom: 8px;
+    font-family: 'Times New Roman', Times, serif;
+    color: #2A240F;
   }
   
   .generic-form input,
@@ -31,16 +33,23 @@
   }
   
   .generic-form button {
-    background-color: #DBC1A9;
-    border-radius: 4px;
-    border: 0;
-    color: #131200;
-    display: block;
-    font-size: 18px;
-    font-weight: bold;
-    padding: 8px;
+    box-shadow: 0px 10px 14px -7px #40351E;
+    background:linear-gradient(to bottom, #3B311B 5%, #40351E 100%);
+    background-color:#AF8A68;
+    border-radius:4px;
+    border:1px solid #40351E;
+    display:inline-block;
+    cursor:pointer;
+    color:#cacaca;
+    font-family:Arial;
+    font-size:13px;
+    font-weight:bold;
+    padding:6px 12px;
+    text-decoration:none;
+    text-shadow:0px 1px 0px #131200;
+    width: 300px;
+    margin: 5px 0 5px 0;
     text-align: center;
-    text-decoration: none;
   }
   .generic-form button[type="submit"]:hover {
     background-color: #29862e;
