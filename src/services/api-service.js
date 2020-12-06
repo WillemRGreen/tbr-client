@@ -38,6 +38,18 @@ const ApiService = {
           : res.json()
       )
   },
+  getCompletedBooks(){
+    return fetch(`${config.API_ENDPOINT}/api/books/completed`, {
+      headers: {
+        'authorization': `bearer ${TokenService.getAuthToken()}`,
+      },
+    })
+      .then(res =>
+        (!res.ok)
+          ? res.json().then(e => Promise.reject(e))
+          : res.json()
+      )
+  },
   postFolder(name) {
     return fetch(`${config.API_ENDPOINT}/api/folders`, {
       method: 'POST',
@@ -55,7 +67,7 @@ const ApiService = {
           : res.json()
       )
   },
-  postBook(name, folder_id, description, user_id) {
+  postBook(name, folder_id, description) {
     return fetch(`${config.API_ENDPOINT}/api/books`, {
       method: 'POST',
       headers: {
@@ -66,7 +78,7 @@ const ApiService = {
         name: name,
         folder_id: folder_id,
         description: description,
-        user_id: user_id,
+        completed: false
       }),
     })
       .then(res =>

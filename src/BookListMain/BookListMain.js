@@ -27,6 +27,13 @@ export default class BookListMain extends Component {
                     Add Book
                 </button>
             </Link>
+            <Link
+                to={`/completed`}>
+                <button 
+                    className='completed-link'>
+                    Your Read Page
+                </button>
+            </Link>
         </div>
         <ul>
           {booksForFolder.map(book =>

@@ -6,6 +6,7 @@ import PublicOnlyRoute from './Utils/PublicOnlyRoute'
 import LoginPage from './LoginPage/LoginPage'
 import RegistrationPage from './RegistrationPage/RegistrationPage'
 import LandingPage from './LandingPage/LandingPage'
+import ReadItPage from './ReadItPage/ReadItPage'
 //import NotFoundPage from './NotFoundPage/NotFoundPage'
 import BookListMain from './BookListMain/BookListMain'
 import BookPageNav from './BookPageNav/BookPageNav'
@@ -20,8 +21,7 @@ import './App.css'
 class App extends Component {
   state = {
     books: [],
-    folders: [],
-    user_name: ''
+    folders: []
   };
 
   componentDidMount() {
@@ -57,10 +57,6 @@ class App extends Component {
         book
       ]
     })
-  }
-
-  handleUsernameStorage = user_name => {
-    this.setState({user_name: user_name})
   }
 
   handleDeleteBook = bookId => {
@@ -123,6 +119,10 @@ class App extends Component {
           />
         )}
         <PrivateRoute
+          path='/completed'
+          component={ReadItPage} 
+        />
+        <PrivateRoute
           path='/book/:bookId'
           component={BookPage}
         />
@@ -142,11 +142,9 @@ class App extends Component {
     const value = {
       books: this.state.books,
       folders: this.state.folders,
-      user_name: this.state.user_name,
       addFolder: this.handleAddFolder,
       addBook: this.handleAddBook,
       deleteBook: this.handleDeleteBook,
-      changeUsername: this.handleUsernameStorage
     }
     return (
       <ApiContext.Provider value={value}>
