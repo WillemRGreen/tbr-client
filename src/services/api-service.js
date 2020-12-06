@@ -38,18 +38,6 @@ const ApiService = {
           : res.json()
       )
   },
-  getCompletedBooks(){
-    return fetch(`${config.API_ENDPOINT}/api/books/completed`, {
-      headers: {
-        'authorization': `bearer ${TokenService.getAuthToken()}`,
-      },
-    })
-      .then(res =>
-        (!res.ok)
-          ? res.json().then(e => Promise.reject(e))
-          : res.json()
-      )
-  },
   postFolder(name) {
     return fetch(`${config.API_ENDPOINT}/api/folders`, {
       method: 'POST',
@@ -86,6 +74,34 @@ const ApiService = {
           ? res.json().then(e => Promise.reject(e))
           : res.json()
       )
+  },
+  deleteBook(id) {
+    return fetch(`${config.API_ENDPOINT}/api/books/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'content-type': 'application/json',
+        'authorization': `bearer ${TokenService.getAuthToken()}`,
+      },
+    })
+    .then(res => 
+      (!res.ok)
+        ? res.json().then(e => Promise.reject(e))
+        : res
+    )
+  },
+  deleteFolder(id) {
+    return fetch(`${config.API_ENDPOINT}/api/folders/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'content-type': 'application/json',
+        'authorization': `bearer ${TokenService.getAuthToken()}`,
+      },
+    })
+    .then(res => 
+      (!res.ok)
+        ? res.json().then(e => Promise.reject(e))
+        : res
+    )
   }
 }
 

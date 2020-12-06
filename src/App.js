@@ -32,13 +32,13 @@ class App extends Component {
       .catch(error => {
         console.error({ error })
       })
-      ApiService.getBooks()
-    .then((books) => {
-      this.setState({ books })
-    })
-    .catch(error => {
-      console.error({ error })
-    })
+    ApiService.getBooks()
+      .then((books) => {
+        this.setState({ books })
+      })
+      .catch(error => {
+        console.error({ error })
+      })
   }
 
   handleAddFolder = folder => {
