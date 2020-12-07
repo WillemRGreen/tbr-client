@@ -52,7 +52,6 @@
     text-align: center;
   }
   .generic-form button[type="submit"]:hover {
-    background-color: #29862e;
     color: white;
   }
   

@@ -27,10 +27,6 @@ export default class LoginPage extends Component {
             TokenService.saveAuthToken(res.authToken)
             this.props.onLoginSuccess()
           })
-        //   .then(user_name => {
-        //       this.context.changeUsername(user_name)
-        //       this.props.history.push('/')
-        //   })
           .catch(res => {
             this.setState({ error: res.error })
           })

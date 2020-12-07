@@ -2,9 +2,12 @@ import React, { Component } from 'react'
 import GenericForm from '../GenericForm/GenericForm'
 import ApiContext from '../ApiContext'
 import ApiService from '../services/api-service'
-import './AddBookPage.css'
+import { findBook } from '../books-helpers'
+import './EditBookPage.css'
 
-export default class AddBookPage extends Component {
+
+
+export default class EditBookPage extends Component {
   static defaultProps = {
     history: {
       push: () => { }
@@ -22,6 +25,7 @@ export default class AddBookPage extends Component {
 
   handleSubmit = e => {
     e.preventDefault()
+    const { bookId } = this.props.match.params;
     if(this.state.name.length > 0){
       if(this.state.description.length > 0){
         const newBook = {
@@ -29,10 +33,10 @@ export default class AddBookPage extends Component {
           description: e.target['book-description'].value,
           folder_id: e.target['book-folder-id'].value
         }
-        ApiService.postBook(newBook.name, newBook.folder_id, newBook.description)
+        ApiService.patchBook(bookId, newBook)
           .then(book => {
-            this.context.addBook(book)
-            this.props.history.push(`/folder/${book.folder_id}`)
+            this.context.addBook(bookId, book)
+            this.props.history.push('/')
           })
           .catch(error => {
             console.error({ error })
@@ -55,32 +59,35 @@ export default class AddBookPage extends Component {
   }
 
   render() {
+    const { books=[] } = this.context
+    const { bookId } = this.props.match.params
+    const book = findBook(books, parseInt(bookId)) || { description: '' }
     let nameInput ='';
     let descInput='';
     if(this.state.nameError){
       nameInput =
         <div>
-          <input onChange={this.handleNameChange} className='error-message' type='text' id='book-name-input' name='book-name' />
+          <input onChange={this.handleNameChange} defaultValue={book.name} className='error-message' type='text' id='book-name-input' name='book-name' />
           <p className='error-message'>Enter a name</p>
         </div>
     } else {
       nameInput =
-        <input onChange={this.handleNameChange} type='text' id='book-name-input' name='book-name' />
+        <input onChange={this.handleNameChange} defaultValue={book.name} type='text' id='book-name-input' name='book-name' />
     }
     if(this.state.descError){
       descInput = 
       <div>
-        <textarea onChange={this.handleDescriptionChange} className='error-message' id='book-description-input' name='book-description' />
+        <textarea onChange={this.handleDescriptionChange} defaultValue={book.description} className='error-message' id='book-description-input' name='book-description' />
         <p className='error-message'>Enter description</p>
       </div>
     } else {
       descInput = 
-        <textarea onChange={this.handleDescriptionChange} id='book-description-input' name='book-description' />
+        <textarea onChange={this.handleDescriptionChange} defaultValue={book.description} id='book-description-input' name='book-description' />
     }
     const { folders=[] } = this.context
     return (
       <section className='AddBook'>
-        <h2>Create a book</h2>
+        <h2>Edit Book</h2>
         <GenericForm onSubmit={this.handleSubmit}>
           <div className='field'>
             <label htmlFor='book-name-input'>
@@ -109,7 +116,7 @@ export default class AddBookPage extends Component {
           </div>
           <div className='buttons'>
             <button type='submit'>
-              Add book
+              Submit Edits
             </button>
           </div>
         </GenericForm>

@@ -9,7 +9,7 @@
     margin:30px 30px;
   }
   
-  .Delete-Book {
+  .button{
     box-shadow: 0px 10px 14px -7px #40351E;
     background:linear-gradient(to bottom, #3B311B 5%, #40351E 100%);
     background-color:#AF8A68;
@@ -24,11 +24,11 @@
     padding:6px 12px;
     text-decoration:none;
     text-shadow:0px 1px 0px #131200;
-    width: 300px;
-    margin: 5px 0 5px 0;
+    width: 150px;
+    margin: 5px 5px 5px 0;
     text-align: center;
   }
 
-  .Delete-Book:hover {
+  .button:hover {
     color:white;
   }

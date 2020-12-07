@@ -7,6 +7,7 @@ import LoginPage from './LoginPage/LoginPage'
 import RegistrationPage from './RegistrationPage/RegistrationPage'
 import LandingPage from './LandingPage/LandingPage'
 import ReadItPage from './ReadItPage/ReadItPage'
+import EditBookPage from './EditBookPage/EditBookPage'
 //import NotFoundPage from './NotFoundPage/NotFoundPage'
 import BookListMain from './BookListMain/BookListMain'
 import BookPageNav from './BookPageNav/BookPageNav'
@@ -64,6 +65,12 @@ class App extends Component {
       books: this.state.books.filter(book => book.id !== bookId)
     })
   }
+
+//   handleEditBook(bookId, newBook){
+//     this.setState({
+//       books: this.state.books.filter(book => book.id !== bookId), newBook
+//   })
+// }
 
   renderNavRoutes() {
     return (
@@ -123,6 +130,10 @@ class App extends Component {
           component={ReadItPage} 
         />
         <PrivateRoute
+          path='/edit/:bookId'
+          component={EditBookPage} 
+        />
+        <PrivateRoute
           path='/book/:bookId'
           component={BookPage}
         />
@@ -145,6 +156,7 @@ class App extends Component {
       addFolder: this.handleAddFolder,
       addBook: this.handleAddBook,
       deleteBook: this.handleDeleteBook,
+      editBook: this.handleEditBook,
     }
     return (
       <ApiContext.Provider value={value}>
