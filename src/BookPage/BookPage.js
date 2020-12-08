@@ -95,6 +95,14 @@ export default class BookPageMain extends React.Component {
         >
           Mark as Read
         </button>
+        <button
+          tag='button'
+          role='link'
+          onClick={() => this.props.history.goBack()}
+          className='button'
+        >
+        Back
+      </button>
       </section>
     )
   }

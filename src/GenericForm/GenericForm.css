@@ -3,6 +3,7 @@
     color: #131200;
     padding: 16px;
     max-width: 332px;
+    position:relative;
   }
   
   .generic-form label {

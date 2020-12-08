@@ -27,7 +27,7 @@ export default class ReadItPage extends Component {
                         So far, you've read {totalBooks}, congrats on your reading progress!
                     </h3>
                 </div>
-                <section className='Completed-Books-List'>
+                <section className='Completed-Books-List group'>
                     <ul>
                     {filteredBooks.map(book =>
                         <li key={book.id}>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import TokenService from '../services/token-service'
 import AuthApiService from '../services/auth-api-service'
+import GenericForm from '../GenericForm/GenericForm'
 import ApiContext from '../ApiContext'
 
 export default class LoginPage extends Component {
@@ -35,7 +36,7 @@ export default class LoginPage extends Component {
     render(){
         const { error } = this.state
         return (
-            <form 
+            <GenericForm 
                 className='login-form'
                 onSubmit={this.handleSubmitJwtAuth}>
 
@@ -66,7 +67,7 @@ export default class LoginPage extends Component {
                 <button type='submit'>
                     Login
                 </button>    
-            </form>
+            </GenericForm>
             
         )
     }

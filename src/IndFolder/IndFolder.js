@@ -9,7 +9,7 @@ export default class IndFolder extends React.Component {
   render() {
     const { folders=[]} = this.context
     return (
-      <div className='Folder'>
+      <div className='Folder item'>
         <ul className='Folder__list'>
           {folders.map(folder =>
             <li key={folder.id}>

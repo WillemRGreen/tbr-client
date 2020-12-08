@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import GenericForm from '../GenericForm/GenericForm'
 import AuthApiService from '../services/auth-api-service'
 
 export default class RegistrationPage extends Component {
@@ -35,7 +36,7 @@ export default class RegistrationPage extends Component {
   render() {
     const { error } = this.state
     return (
-      <form
+      <GenericForm
         className='RegistrationPage'
         onSubmit={this.handleSubmit}
       >
@@ -78,7 +79,7 @@ export default class RegistrationPage extends Component {
         <button type='submit'>
           Register
         </button>
-      </form>
+      </GenericForm>
     )
   }
 }

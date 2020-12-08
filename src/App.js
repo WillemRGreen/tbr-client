@@ -8,9 +8,8 @@ import RegistrationPage from './RegistrationPage/RegistrationPage'
 import LandingPage from './LandingPage/LandingPage'
 import ReadItPage from './ReadItPage/ReadItPage'
 import EditBookPage from './EditBookPage/EditBookPage'
-//import NotFoundPage from './NotFoundPage/NotFoundPage'
 import BookListMain from './BookListMain/BookListMain'
-import BookPageNav from './BookPageNav/BookPageNav'
+// import BookPageNav from './BookPageNav/BookPageNav'
 import IndFolder from './IndFolder/IndFolder'
 import ApiService from './services/api-service'
 import AddBookPage from './AddBookPage/AddBookPage'
@@ -66,12 +65,6 @@ class App extends Component {
     })
   }
 
-//   handleEditBook(bookId, newBook){
-//     this.setState({
-//       books: this.state.books.filter(book => book.id !== bookId), newBook
-//   })
-// }
-
   renderNavRoutes() {
     return (
       <>
@@ -91,25 +84,22 @@ class App extends Component {
           path={'/register'}
           component={RegistrationPage}
         />
-        <PrivateRoute
+        {/* <PrivateRoute
           path='/book/:bookId'
           component={BookPageNav}
-        />
-        <PrivateRoute
+        /> */}
+        {/* <PrivateRoute
           path='/add-folder'
           component={BookPageNav}
-        />
-        <PrivateRoute
+        /> */}
+        {/* <PrivateRoute
           path='/add-book'
           component={BookPageNav}
-        />
+        /> */}
         <Route 
           path={'/landing-page'}
           component={LandingPage}
         />
-        {/* <Route
-          component={NotFoundPage}
-        /> */}
       </>
     )
   }
@@ -156,20 +146,22 @@ class App extends Component {
       addFolder: this.handleAddFolder,
       addBook: this.handleAddBook,
       deleteBook: this.handleDeleteBook,
-      editBook: this.handleEditBook,
     }
     return (
       <ApiContext.Provider value={value}>
         <div className='App'>
-          <nav className='App__nav'>
-            {this.renderNavRoutes()}
-          </nav>
-          <header className='App__header'>
+        <header className='App__header'>
             <Header />
           </header>
-          <main className='App__main'>
-            {this.renderMainRoutes()}
-          </main>
+          <div className='group'>
+            <nav className='App__nav'>
+              {this.renderNavRoutes()}
+            </nav>
+            <main className='App__main'>
+              {this.renderMainRoutes()}
+            </main>
+          </div>
+          
         </div>
       </ApiContext.Provider>
     )
