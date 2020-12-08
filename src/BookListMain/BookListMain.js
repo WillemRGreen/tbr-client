@@ -20,18 +20,18 @@ export default class BookListMain extends Component {
     const filteredBooks = filterBooksByCompleted(booksForFolder, false)
     return (
       <section className='BookListMain'>
-        <div>
+        <div className='this-group'>
             <Link
                 to={`/add-book`}>
                 <button 
-                    className='add-book-button'>
+                    className='button'>
                     Add Book
                 </button>
             </Link>
             <Link
                 to={`/completed`}>
                 <button 
-                    className='completed-link'>
+                    className='button'>
                     Read-it Page
                 </button>
             </Link>

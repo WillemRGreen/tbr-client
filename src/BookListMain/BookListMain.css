@@ -5,7 +5,7 @@
     padding: 10px;
   }
   
-  .add-book-button {
+  .button {
     box-shadow: 0px 10px 14px -7px #40351E;
     background:linear-gradient(to bottom, #3B311B 5%, #40351E 100%);
     background-color:#AF8A68;
@@ -20,35 +20,15 @@
     padding:6px 12px;
     text-decoration:none;
     text-shadow:0px 1px 0px #131200;
-    width: 80px;
     margin: 10px 0 10px 15px;
   }
 
-  .add-book-button:hover {
+  .button:hover {
     background-color: #56675A;
     color: white;
   }
 
-  .completed-link {
-    box-shadow: 0px 10px 14px -7px #40351E;
-    background:linear-gradient(to bottom, #3B311B 5%, #40351E 100%);
-    background-color:#AF8A68;
-    border-radius:4px;
-    border:1px solid #40351E;
-    display:inline-block;
-    cursor:pointer;
-    color:#cacaca;
-    font-family:Arial;
-    font-size:13px;
-    font-weight:bold;
-    padding:6px 12px;
-    text-decoration:none;
-    text-shadow:0px 1px 0px #131200;
-    width: 80px;
-    margin: 10px 0 10px 10px;
-  }
-
-  .completed-link:hover {
-    background-color: #56675A;
-    color: white;
+  .this-group {
+    display:flex;
+    flex-direction: row;
   }

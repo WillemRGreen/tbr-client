@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import ApiContext from '../ApiContext'
 import './IndFolder.css'
 
@@ -13,12 +13,12 @@ export default class IndFolder extends React.Component {
         <ul className='Folder__list'>
           {folders.map(folder =>
             <li key={folder.id}>
-              <NavLink
-                className='IndFolder__folder-link'
+              <Link
+                className='button'
                 to={`/folder/${folder.id}`}
               >
                 {folder.name}
-              </NavLink>
+              </Link>
             </li>
           )}
         </ul>
@@ -26,7 +26,7 @@ export default class IndFolder extends React.Component {
             <Link
                 to={`/add-folder`}>
                 <button 
-                    className='add-folder-button'>
+                    className='button'>
                     Add Folder
                 </button>
             </Link>

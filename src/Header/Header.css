@@ -1,14 +1,19 @@
 .Header {
     display: flex;
-    justify-content: space-between;
+    align-items: baseline;
+    justify-content: center;
+    background-image: linear-gradient(#40351E, #2A240F);
+    border-bottom-left-radius: 50% 20%;
+    border-bottom-right-radius: 50% 20%;
   }
   
   header h1 {
-    background-color: #DBC1A9;
     font-family: Georgia, 'Times New Roman', Times, serif;
     padding-left: 16px;
     padding-top: 32px;
-    margin: 0 50px;
+    margin: 0 0px 30px;
+    font-size: 25pt;
+    justify-content: center;
   }
   
   .Header h1 a {
@@ -16,25 +21,25 @@
   }
   
   .Header a {
-    color: #2A240F;
+    color: #cacaca;
   }
   
-  .Header__not-logged-in {
-    display: flex;
-    flex-direction: column;
+  .Header_not-logged-in {
+    justify-content: right;
+    margin: 0 50px 0 30px;
+  }
+
+  .Header_logged-in {
+    justify-content: right;
+    margin: 0 50px 0 30px;
   }
   
-  @media screen and (min-width: 450px) {
+  @media screen and (min-width: 800px) {
     .Header {
-      align-items: baseline;
-      justify-content: center;
+      align-items: baseline; 
     }
     .Header h1 {
       font-size: 28pt;
-    }
-  
-    .Header__not-logged-in {
-      flex-direction: row;
     }
   }
   

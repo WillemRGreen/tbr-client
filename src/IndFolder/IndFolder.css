@@ -3,12 +3,12 @@
     list-style-type: none;
     padding: 0;
   }
-  .IndFolder__folder-link:hover {
+  .button:hover {
     color: white;
     cursor: pointer;
   }
 
-  .IndFolder__folder-link {
+  .button {
     box-shadow: 0px 10px 14px -7px #40351E;
     background:linear-gradient(to bottom, #3B311B 5%, #40351E 100%);
     background-color:#AF8A68;
@@ -23,30 +23,13 @@
     padding:6px 12px;
     text-decoration:none;
     text-shadow:0px 1px 0px #131200;
-    height:30px;
-    width: 100px;
-    margin: 5px 0 5px 0;
-  }
-  
-  .add-folder-button {
-    box-shadow: 0px 10px 14px -7px #40351E;
-    background:linear-gradient(to bottom, #3B311B 5%, #40351E 100%);
-    background-color:#AF8A68;
-    border-radius:4px;
-    border:1px solid #40351E;
-    display:inline-block;
-    cursor:pointer;
-    color:#cacaca;
-    font-family:Arial;
-    font-size:13px;
-    font-weight:bold;
-    padding:6px 12px;
-    text-decoration:none;
-    text-shadow:0px 1px 0px #131200;
-    margin: 5px 0 10px 30px
+    margin: 5px 50px 5px 0;
+    min-width: 50px;
   }
 
-  .add-folder-button:hover {
-    color: white;
-    cursor: pointer;
+
+@media all and (min-width:800px) {
+  .button {
+    min-width: 100px;
   }
+}

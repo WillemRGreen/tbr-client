@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Book from '../IndBook/IndBook'
 import ApiContext from '../ApiContext'
 import { findBook } from '../books-helpers'
 import ApiService from '../services/api-service'
@@ -58,17 +57,12 @@ export default class BookPageMain extends React.Component {
     const book = findBook(books, parseInt(bookId)) || { description: '' }
     return (
       <section className='BookPage'>
-        <Book
-          id={book.id}
-          name={book.name}
-          modified={book.modified}
-          onDeleteBook={this.handleDeleteBook}
-        />
+        <div className='book-title'>
+        {book.name}
+        </div>
         <div className='BookPage__content'>
           Your description:
-          {book.description.split(/\n \r|\n/).map((para, i) =>
-            <p key={i}>{para}</p>
-          )}
+          {book.description}
         </div>
         <button 
           className='button' 

@@ -3,13 +3,13 @@
   font-family: 'Times New Roman', Times, serif;
 }
 
-.App__header {
-  padding-left: 20px;
-  padding-right: 20px;
-}
-
 .App__main {
   background-color: #DBC1A9;
+  flex:2;
+}
+
+.App-nav {
+  flex: 1;
 }
 
 .group {
@@ -17,7 +17,7 @@
   display:flex;
   flex-wrap: wrap;
   justify-content:center;
-  margin: 50px 0;
+  margin: 50px 0 0 30px;
 }
 
 @media all and (min-width:800px) {
@@ -26,5 +26,16 @@
       display: flex;
       flex-wrap: wrap;
       justify-content:center;
+      margin: 50px 0 0 100px;
+    }
+
+    .App__main {
+      background-color: #DBC1A9;
+      flex:1;
+      margin: 0 0 0 50px;
+    }
+    
+    .App-nav {
+      flex:1
     }
 }

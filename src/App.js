@@ -9,7 +9,6 @@ import LandingPage from './LandingPage/LandingPage'
 import ReadItPage from './ReadItPage/ReadItPage'
 import EditBookPage from './EditBookPage/EditBookPage'
 import BookListMain from './BookListMain/BookListMain'
-// import BookPageNav from './BookPageNav/BookPageNav'
 import IndFolder from './IndFolder/IndFolder'
 import ApiService from './services/api-service'
 import AddBookPage from './AddBookPage/AddBookPage'
@@ -84,18 +83,6 @@ class App extends Component {
           path={'/register'}
           component={RegistrationPage}
         />
-        {/* <PrivateRoute
-          path='/book/:bookId'
-          component={BookPageNav}
-        /> */}
-        {/* <PrivateRoute
-          path='/add-folder'
-          component={BookPageNav}
-        /> */}
-        {/* <PrivateRoute
-          path='/add-book'
-          component={BookPageNav}
-        /> */}
         <Route 
           path={'/landing-page'}
           component={LandingPage}

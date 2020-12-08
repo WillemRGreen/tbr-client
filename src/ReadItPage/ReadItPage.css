@@ -1,29 +1,32 @@
 
 .Completed-Books-List ul {
     list-style-type: none;
-    margin: 0;
-    padding: 10px;
-    justify-content:center;
+    justify-content:left;
   }
 
-  h2 {
-      text-align:left;
-      margin: 20px 0 30px 0
+  h3 {
+    text-align:left;
+    margin: 20px 0 30px 0;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size:15pt;
+    font-weight:bold;
+    color: #2A240F;
   };
 
 .group {
     flex-direction:row;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content:center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 @media all and (min-width:800px) {
     .group {
-        flex-direction:row;
+        flex-direction:column;
         display: flex;
         flex-wrap: wrap;
-        justify-content:center;
+        justify-content:left;
+        margin:0;
       }
   }
   
