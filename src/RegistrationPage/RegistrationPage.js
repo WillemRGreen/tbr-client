@@ -9,6 +9,11 @@ export default class RegistrationPage extends Component {
 
   state = { error: null }
 
+  handleRegistrationSuccess = user => {
+    const { history } = this.props
+    history.push('/login')
+  }
+
   handleSubmit = ev => {
     ev.preventDefault()
     const { full_name, user_name, password } = ev.target
@@ -26,7 +31,7 @@ export default class RegistrationPage extends Component {
         full_name.value = ''
         user_name.value = ''
         password.value = ''
-        this.props.onRegistrationSuccess()
+        this.handleRegistrationSuccess()
       })
       .catch(res => {
         this.setState({ error: res.error })

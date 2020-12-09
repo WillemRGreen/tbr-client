@@ -27,6 +27,25 @@
     min-width: 50px;
   }
 
+  .logout-button {
+    box-shadow: 0px 10px 14px -7px #40351E;
+    background:linear-gradient(to bottom, #3B311B 5%, #40351E 100%);
+    background-color:#AF8A68;
+    border-radius:4px;
+    border:1px solid #40351E;
+    display:inline-block;
+    cursor:pointer;
+    color:#cacaca;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-size:13px;
+    font-weight:bold;
+    padding:6px 12px;
+    text-decoration:none;
+    text-shadow:0px 1px 0px #131200;
+    margin: 5px 50px 5px 0;
+    min-width: 50px;
+  }
+
 
 @media all and (min-width:800px) {
   .button {

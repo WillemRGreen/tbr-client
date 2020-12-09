@@ -13,6 +13,12 @@ export default class LoginPage extends Component {
 
     static contextType = ApiContext
 
+    handleLoginSuccess = () => {
+        const { location, history } = this.props
+        const destination = (location.state || {}).from || '/'
+        history.push(destination)
+      }
+
     handleSubmitJwtAuth = ev => {
         ev.preventDefault()
         this.setState({ error: null })
@@ -26,7 +32,7 @@ export default class LoginPage extends Component {
             user_name.value = ''
             password.value = ''
             TokenService.saveAuthToken(res.authToken)
-            this.props.onLoginSuccess()
+            this.handleLoginSuccess()
           })
           .catch(res => {
             this.setState({ error: res.error })
