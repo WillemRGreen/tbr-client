@@ -35,7 +35,7 @@ export default class LoginPage extends Component {
             this.handleLoginSuccess()
           })
           .catch(res => {
-            this.setState({ error: res.error })
+            this.setState({ error: res.error.message })
           })
       }
 

@@ -24,9 +24,6 @@ export default class RegistrationPage extends Component {
       password: password.value,
       full_name: full_name.value,
     })
-    .then(user => {
-        this.setState({user_name: user_name})
-    })
       .then(user => {
         full_name.value = ''
         user_name.value = ''
@@ -34,7 +31,7 @@ export default class RegistrationPage extends Component {
         this.handleRegistrationSuccess()
       })
       .catch(res => {
-        this.setState({ error: res.error })
+        this.setState({ error: res.error.message })
       })
   }
 
