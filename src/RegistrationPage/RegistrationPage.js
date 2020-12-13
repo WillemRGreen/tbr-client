@@ -31,7 +31,7 @@ export default class RegistrationPage extends Component {
         this.handleRegistrationSuccess()
       })
       .catch(res => {
-        this.setState({ error: res.error.message })
+        this.setState({ error: res.error })
       })
   }
 
@@ -42,7 +42,7 @@ export default class RegistrationPage extends Component {
         className='RegistrationPage'
         onSubmit={this.handleSubmit}
       >
-        <div role='alert'>
+        <div>
           {error && <p className='red'>{error}</p>}
         </div>
         <div className='full_name'>

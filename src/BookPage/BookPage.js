@@ -43,7 +43,7 @@ export default class BookPageMain extends React.Component {
     ApiService.patchBook(bookId, newBook)
       .then(book => {
         this.context.addBook(book)
-        console.log(book)
+        this.context.loggedIn()
         this.props.history.push('/completed')
       })
       .catch(error => {
@@ -60,43 +60,49 @@ export default class BookPageMain extends React.Component {
         <div className='book-title'>
         {book.name}
         </div>
+        <div>
+          <p>Your Description:</p>
+        </div>
         <div className='BookPage__content'>
-          Your description:
           {book.description}
         </div>
-        <button 
-          className='button' 
-          type='button' 
-          onClick={this.handleDeleteBook}
-        >
-            Delete Book
+        <div className='group-for-buttons'>
+          <button 
+            className='button' 
+            type='button' 
+            onClick={this.handleDeleteBook}
+          >
+              Delete Book
+          </button>
+          
+              <button
+                className='button'
+                type='button'
+              >
+                <Link
+                  to={`/edit/${bookId}`}
+                >
+                  Edit Book
+                </Link>
+              </button>
+          
+          <button
+            className='button'
+            type='button'
+            onClick={this.markComplete}
+          >
+            Mark as Read
+          </button>
+          <button
+            tag='button'
+            role='link'
+            onClick={() => this.props.history.goBack()}
+            className='button'
+          >
+          Back
         </button>
-        <Link
-            to={`/edit/${bookId}`}
-        >
-            <button
-              className='button'
-              type='button'
-            >
-              
-              Edit Book
-            </button>
-        </Link>
-        <button
-          className='button'
-          type='button'
-          onClick={this.markComplete}
-        >
-          Mark as Read
-        </button>
-        <button
-          tag='button'
-          role='link'
-          onClick={() => this.props.history.goBack()}
-          className='button'
-        >
-        Back
-      </button>
+      </div>
+        
       </section>
     )
   }

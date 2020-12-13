@@ -32,6 +32,7 @@ export default class AddBookPage extends Component {
         ApiService.postBook(newBook.name, newBook.folder_id, newBook.description)
           .then(book => {
             this.context.addBook(book)
+            this.context.loggedIn()
             this.props.history.push(`/folder/${book.folder_id}`)
           })
           .catch(error => {

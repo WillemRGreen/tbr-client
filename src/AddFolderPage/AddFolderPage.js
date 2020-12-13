@@ -26,6 +26,7 @@ export default class AddFolder extends Component {
       ApiService.postFolder(folder.name)
         .then(folder => {
           this.context.addFolder(folder)
+          this.context.loggedIn()
           this.props.history.push(`/folder/${folder.id}`)
         })
         .catch(error => {

@@ -17,6 +17,7 @@ export default class LoginPage extends Component {
         const { location, history } = this.props
         const destination = (location.state || {}).from || '/'
         history.push(destination)
+        this.context.loggedIn()
       }
 
     handleSubmitJwtAuth = ev => {
@@ -35,7 +36,7 @@ export default class LoginPage extends Component {
             this.handleLoginSuccess()
           })
           .catch(res => {
-            this.setState({ error: res.error.message })
+            this.setState({ error: res.error })
           })
       }
 

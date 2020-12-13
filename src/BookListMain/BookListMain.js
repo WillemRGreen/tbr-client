@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import IndBook from '../IndBook/IndBook'
 import ApiContext from '../ApiContext'
+import ApiService from '../services/api-service'
 import { filterBooksByCompleted, getBooksForFolder } from '../books-helpers'
 import './BookListMain.css'
 
@@ -12,7 +13,7 @@ export default class BookListMain extends Component {
     }
   }
   static contextType = ApiContext
-
+  
   render() {
     const { folderId } = this.props.match.params
     const { books=[] } = this.context

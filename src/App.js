@@ -38,6 +38,7 @@ class App extends Component {
       .catch(error => {
         console.error({ error })
       })
+    
   }
 
   handleAddFolder = folder => {
@@ -62,6 +63,24 @@ class App extends Component {
     this.setState({
       books: this.state.books.filter(book => book.id !== bookId)
     })
+  }
+
+  handleLoggedIn = e => {
+    console.log('this worked')
+      ApiService.getFolders()
+        .then((folders) => {
+          this.setState({ folders })
+        })
+        .catch(error => {
+          console.error({ error })
+        })
+      ApiService.getBooks()
+        .then((books) => {
+          this.setState({ books })
+        })
+        .catch(error => {
+          console.error({ error })
+        })
   }
 
   renderNavRoutes() {
@@ -133,6 +152,7 @@ class App extends Component {
       addFolder: this.handleAddFolder,
       addBook: this.handleAddBook,
       deleteBook: this.handleDeleteBook,
+      loggedIn: this.handleLoggedIn
     }
     return (
       <ApiContext.Provider value={value}>

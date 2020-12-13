@@ -6,5 +6,5 @@ export default React.createContext({
   addFolder: () => {},
   addBook: () => {},
   deleteBook: () => {},
-  editBook: () => {}
+  loggedIn: () => {}
 })
