@@ -66,7 +66,6 @@ class App extends Component {
   }
 
   handleLoggedIn = e => {
-    console.log('this worked')
       ApiService.getFolders()
         .then((folders) => {
           this.setState({ folders })
