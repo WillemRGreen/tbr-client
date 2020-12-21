@@ -15,30 +15,32 @@ import AddBookPage from './AddBookPage/AddBookPage'
 import AddFolderPage from './AddFolderPage/AddFolderPage'
 import BookPage from './BookPage/BookPage'
 import ApiContext from './ApiContext'
+import TokenService from './services/token-service'
 import './App.css'
 
 class App extends Component {
   state = {
     books: [],
-    folders: []
+    folders: [],
   };
 
   componentDidMount() {
-    ApiService.getFolders()
-      .then((folders) => {
-        this.setState({ folders })
-      })
-      .catch(error => {
-        console.error({ error })
-      })
-    ApiService.getBooks()
-      .then((books) => {
-        this.setState({ books })
-      })
-      .catch(error => {
-        console.error({ error })
-      })
-    
+    if(TokenService.hasAuthToken()){
+      ApiService.getFolders()
+        .then((folders) => {
+          this.setState({ folders })
+        })
+        .catch(error => {
+          console.error({ error })
+        })
+      ApiService.getBooks()
+        .then((books) => {
+          this.setState({ books })
+        })
+        .catch(error => {
+          console.error({ error })
+        })
+    }
   }
 
   handleAddFolder = folder => {
