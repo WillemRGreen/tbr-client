@@ -17,27 +17,33 @@ export default class AddBookPage extends Component {
     description:'',
     folder_id:'',
     nameError:false,
-    descError:false
+    descError:false,
+    folderError: false
   }
 
   handleSubmit = e => {
     e.preventDefault()
     if(this.state.name.length > 0){
       if(this.state.description.length > 0){
-        const newBook = {
-          name: e.target['book-name'].value,
-          description: e.target['book-description'].value,
-          folder_id: e.target['book-folder-id'].value
+        if(this.state.folder_id.length > 0){
+          const newBook = {
+            name: e.target['book-name'].value,
+            description: e.target['book-description'].value,
+            folder_id: e.target['book-folder-id'].value
+          }
+          ApiService.postBook(newBook.name, newBook.folder_id, newBook.description)
+            .then(book => {
+              this.context.addBook(book)
+              this.context.loggedIn()
+              this.props.history.push(`/folder/${book.folder_id}`)
+            })
+            .catch(error => {
+              console.error({ error })
+            })
         }
-        ApiService.postBook(newBook.name, newBook.folder_id, newBook.description)
-          .then(book => {
-            this.context.addBook(book)
-            this.context.loggedIn()
-            this.props.history.push(`/folder/${book.folder_id}`)
-          })
-          .catch(error => {
-            console.error({ error })
-          })
+        else {
+          this.setState({ folderError: true })
+        }
       } else {
         this.setState({descError:true})
       }
@@ -55,9 +61,15 @@ export default class AddBookPage extends Component {
     this.setState({description:e.currentTarget.value})
   }
 
+  handleFolderIdChange = (e) => {
+    this.setState({folder_id:e.currentTarget.value})
+  }
+
   render() {
     let nameInput ='';
     let descInput='';
+    let optionInput = '';
+    const { folders=[] } = this.context
     if(this.state.nameError){
       nameInput =
         <div>
@@ -78,7 +90,31 @@ export default class AddBookPage extends Component {
       descInput = 
         <textarea onChange={this.handleDescriptionChange} id='book-description-input' name='book-description' />
     }
-    const { folders=[] } = this.context
+    if(this.state.folderError){
+      optionInput = 
+      <div>
+        <select id='book-folder-select' onChange={this.handleFolderIdChange} name='book-folder-id'>
+          <option value={null}>...</option>
+            {folders.map(folder =>
+              <option key={folder.id} value={folder.id}>
+                {folder.name}
+              </option>
+            )}
+        </select>
+      <p className='error-message'>Select a folder</p>
+      </div>
+        } else {
+          optionInput = 
+          <select id='book-folder-select' onChange={this.handleFolderIdChange} name='book-folder-id'>
+          <option value={null}>...</option>
+            {folders.map(folder =>
+              <option key={folder.id} value={folder.id}>
+                {folder.name}
+              </option>
+            )}
+        </select>
+        }
+    
     return (
       <section className='AddBook'>
         <h2>Create a book</h2>
@@ -99,14 +135,7 @@ export default class AddBookPage extends Component {
             <label htmlFor='book-folder-select'>
               Folder
             </label>
-            <select id='book-folder-select' name='book-folder-id'>
-              <option value={null}>...</option>
-              {folders.map(folder =>
-                <option key={folder.id} value={folder.id}>
-                  {folder.name}
-                </option>
-              )}
-            </select>
+            {optionInput}
           </div>
           <div className='buttons'>
             <button type='submit'>

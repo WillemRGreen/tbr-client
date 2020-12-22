@@ -19,6 +19,7 @@ export default class BookPageMain extends React.Component {
     ApiService.deleteBook(bookId)
     .then(book => {
       this.context.deleteBook(book)
+      this.context.loggedIn()
       this.props.history.push(`/`)
     })
     .catch(error => {

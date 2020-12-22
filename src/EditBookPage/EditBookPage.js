@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import GenericForm from '../GenericForm/GenericForm'
 import ApiContext from '../ApiContext'
 import ApiService from '../services/api-service'
-import { findBook } from '../books-helpers'
+import { findBook, findFolder } from '../books-helpers'
 import './EditBookPage.css'
 
 
@@ -20,7 +20,15 @@ export default class EditBookPage extends Component {
     description:'',
     folder_id:'',
     nameError:false,
-    descError:false
+    descError:false,
+    folderError: false
+  }
+
+  componentDidMount() {
+    const { books=[] } = this.context
+    const { bookId } = this.props.match.params
+    const book = findBook(books, parseInt(bookId)) || { description: '' }
+    this.setState({ name: book.name, description: book.description, folder_id: book.folder_id.toString()})
   }
 
   handleSubmit = e => {
@@ -28,19 +36,23 @@ export default class EditBookPage extends Component {
     const { bookId } = this.props.match.params;
     if(this.state.name.length > 0){
       if(this.state.description.length > 0){
-        const newBook = {
-          name: e.target['book-name'].value,
-          description: e.target['book-description'].value,
-          folder_id: e.target['book-folder-id'].value
+        if(this.state.folder_id.length > 0){
+          const newBook = {
+            name: e.target['book-name'].value,
+            description: e.target['book-description'].value,
+            folder_id: e.target['book-folder-id'].value
+          }
+          ApiService.patchBook(bookId, newBook)
+            .then(book => {
+              this.context.addBook(bookId, book)
+              this.props.history.push('/')
+            })
+            .catch(error => {
+              console.error({ error })
+            })
+        } else {
+          this.setState({ folderError: true })
         }
-        ApiService.patchBook(bookId, newBook)
-          .then(book => {
-            this.context.addBook(bookId, book)
-            this.props.history.push('/')
-          })
-          .catch(error => {
-            console.error({ error })
-          })
       } else {
         this.setState({descError:true})
       }
@@ -58,12 +70,19 @@ export default class EditBookPage extends Component {
     this.setState({description:e.currentTarget.value})
   }
 
+  handleFolderIdChange = (e) => {
+    this.setState({folder_id:e.currentTarget.value})
+  }
+
   render() {
     const { books=[] } = this.context
     const { bookId } = this.props.match.params
+    const { folders=[] } = this.context
     const book = findBook(books, parseInt(bookId)) || { description: '' }
-    let nameInput ='';
-    let descInput='';
+    const folder = findFolder(folders, parseInt(book.folder_id))
+    let nameInput = '';
+    let descInput = '';
+    let optionInput = '';
     if(this.state.nameError){
       nameInput =
         <div>
@@ -84,7 +103,30 @@ export default class EditBookPage extends Component {
       descInput = 
         <textarea onChange={this.handleDescriptionChange} defaultValue={book.description} id='book-description-input' name='book-description' />
     }
-    const { folders=[] } = this.context
+    if(this.state.folderError){
+      optionInput = 
+      <div>
+        <select id='book-folder-select' onChange={this.handleFolderIdChange} name='book-folder-id'>
+          <option key={folder.id} value={folder.id}>{folder.name}</option>
+            {folders.map(folder =>
+              <option key={folder.id} value={folder.id}>
+                {folder.name}
+              </option>
+            )}
+        </select>
+      <p className='error-message'>Select a folder</p>
+      </div>
+        } else {
+          optionInput = 
+          <select id='book-folder-select' onChange={this.handleFolderIdChange} name='book-folder-id'>
+          <option key={folder.id} value={folder.id}>{folder.name}</option>
+            {folders.map(folder =>
+              <option key={folder.id} value={folder.id}>
+                {folder.name}
+              </option>
+            )}
+        </select>
+        }
     return (
       <section className='AddBook'>
         <h2>Edit Book</h2>
@@ -105,14 +147,7 @@ export default class EditBookPage extends Component {
             <label htmlFor='book-folder-select'>
               Folder
             </label>
-            <select id='book-folder-select' name='book-folder-id'>
-              <option value={null}>...</option>
-              {folders.map(folder =>
-                <option key={folder.id} value={folder.id}>
-                  {folder.name}
-                </option>
-              )}
-            </select>
+            {optionInput}
           </div>
           <div className='buttons'>
             <button type='submit'>
