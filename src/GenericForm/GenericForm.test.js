@@ -1,11 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
-import App from './App'
+import GenericForm from './GenericForm'
 
-it('renders without crashing', () => {
+it('renders withoout crashing', () => {
     const div = document.createElement('div')
-    ReactDOM.render(<BrowserRouter><App /></BrowserRouter>, div);
+    ReactDOM.render(<BrowserRouter><GenericForm /></BrowserRouter>, div);
 
   ReactDOM.unmountComponentAtNode(div);
 })
