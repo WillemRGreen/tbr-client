@@ -10,3 +10,9 @@ The client side of this app is built on React and React-router, deployed with ve
 
 ##  the app
 
+![Alt text](/screenshots/landingpage.png?raw=true "Landing Page")
+![Alt text](/screenshots/loginpage.png?raw=true "Login Page")
+![Alt text](/screenshots/homepage.png?raw=true "Home Page")
+![Alt text](/screenshots/addbookpage.png?raw=true "Add Book Page")
+![Alt text](/screenshots/bookpage.png?raw=true "Book Page")
+![Alt text](/screenshots/progresspage.png?raw=true "Progress Page")
