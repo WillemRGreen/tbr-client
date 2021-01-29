@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import ApiContext from '../ApiContext'
-import { findBook } from '../books-helpers'
+import { findBook, findFolder } from '../books-helpers'
 import ApiService from '../services/api-service'
 import './BookPage.css'
 
@@ -54,8 +54,10 @@ export default class BookPageMain extends React.Component {
 
   render() {
     const { books=[] } = this.context
+    const { folders = [] } = this.context
     const { bookId } = this.props.match.params
     const book = findBook(books, parseInt(bookId)) || { description: '' }
+    const folder = findFolder(folders, parseInt(book.folder_id))
     return (
       <section className='BookPage'>
         <div className='book-title'>

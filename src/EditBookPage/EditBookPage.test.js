@@ -1,11 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
-import BookPageMain from './BookPage'
+import EditBookPage from './EditBookPage'
 
 it('renders without crashing', () => {
     const div = document.createElement('div')
-    ReactDOM.render(<BrowserRouter><BookPageMain /></BrowserRouter>, div);
+    ReactDOM.render(<BrowserRouter><EditBookPage /></BrowserRouter>, div);
 
   ReactDOM.unmountComponentAtNode(div);
 })

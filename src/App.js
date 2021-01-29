@@ -103,7 +103,7 @@ class App extends Component {
           path={'/register'}
           component={RegistrationPage}
         />
-        <Route 
+        <PublicOnlyRoute 
           path={'/landing-page'}
           component={LandingPage}
         />
@@ -128,7 +128,7 @@ class App extends Component {
         />
         <PrivateRoute
           path='/edit/:bookId'
-          component={EditBookPage} 
+          component={EditBookPage}
         />
         <PrivateRoute
           path='/book/:bookId'

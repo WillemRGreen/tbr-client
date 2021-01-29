@@ -9,13 +9,14 @@ import './EditBookPage.css'
 
 export default class EditBookPage extends Component {
   static defaultProps = {
-    history: {
-      push: () => { }
-    },
+    match: {
+      params: {}
+    }
   }
   static contextType = ApiContext;
 
   state = {
+    book: {},
     name: '',
     description:'',
     folder_id:'',
@@ -27,8 +28,21 @@ export default class EditBookPage extends Component {
   componentDidMount() {
     const { books=[] } = this.context
     const { bookId } = this.props.match.params
-    const book = findBook(books, parseInt(bookId)) || { description: '' }
+    if(bookId){
+      const book = findBook(books, parseInt(bookId)) || { description: '' }
     this.setState({ name: book.name, description: book.description, folder_id: book.folder_id.toString()})
+    }
+  }
+
+  handleBookRetrieve() {
+    const { bookId } = this.props.match.params
+    ApiService.getBook(bookId)
+    .then((book) => {
+      this.setState({ book })
+    })
+    .catch(error => {
+      console.error({ error })
+    })
   }
 
   handleSubmit = e => {
@@ -42,7 +56,7 @@ export default class EditBookPage extends Component {
             description: e.target['book-description'].value,
             folder_id: e.target['book-folder-id'].value
           }
-          ApiService.patchBook(bookId, newBook)
+            ApiService.patchBook(bookId, newBook)
             .then(book => {
               this.context.addBook(bookId, book)
               this.props.history.push('/')
@@ -77,57 +91,18 @@ export default class EditBookPage extends Component {
   render() {
     const { books=[] } = this.context
     const { bookId } = this.props.match.params
-    const { folders=[] } = this.context
-    const book = findBook(books, parseInt(bookId)) || { description: '' }
-    const folder = findFolder(folders, parseInt(book.folder_id))
+    if(bookId){
+      const { folders=[] } = this.context
+      const book = findBook(books, parseInt(bookId)) || { description: '' }
+      const folder = findFolder(folders, parseInt(book.folder_id))
+    }
+    
     let nameInput = '';
     let descInput = '';
     let optionInput = '';
-    if(this.state.nameError){
-      nameInput =
-        <div>
-          <input onChange={this.handleNameChange} defaultValue={book.name} className='error-message' type='text' id='book-name-input' name='book-name' />
-          <p className='error-message'>Enter a name</p>
-        </div>
-    } else {
-      nameInput =
-        <input onChange={this.handleNameChange} defaultValue={book.name} type='text' id='book-name-input' name='book-name' />
-    }
-    if(this.state.descError){
-      descInput = 
-      <div>
-        <textarea onChange={this.handleDescriptionChange} defaultValue={book.description} className='error-message' id='book-description-input' name='book-description' />
-        <p className='error-message'>Enter description</p>
-      </div>
-    } else {
-      descInput = 
-        <textarea onChange={this.handleDescriptionChange} defaultValue={book.description} id='book-description-input' name='book-description' />
-    }
-    if(this.state.folderError){
-      optionInput = 
-      <div>
-        <select id='book-folder-select' onChange={this.handleFolderIdChange} name='book-folder-id'>
-          <option key={folder.id} value={folder.id}>{folder.name}</option>
-            {folders.map(folder =>
-              <option key={folder.id} value={folder.id}>
-                {folder.name}
-              </option>
-            )}
-        </select>
-      <p className='error-message'>Select a folder</p>
-      </div>
-        } else {
-          optionInput = 
-          <select id='book-folder-select' onChange={this.handleFolderIdChange} name='book-folder-id'>
-          <option key={folder.id} value={folder.id}>{folder.name}</option>
-            {folders.map(folder =>
-              <option key={folder.id} value={folder.id}>
-                {folder.name}
-              </option>
-            )}
-        </select>
-        }
-    return (
+    let inputForPage = <div></div>;
+    if(bookId){
+      inputForPage = 
       <section className='AddBook'>
         <h2>Edit Book</h2>
         <GenericForm onSubmit={this.handleSubmit}>
@@ -156,6 +131,60 @@ export default class EditBookPage extends Component {
           </div>
         </GenericForm>
       </section>
+    } else {
+      inputForPage = <div>Could not retrieve folder</div>
+    }
+    if(bookId){
+      if(this.state.nameError){
+        nameInput =
+          <div>
+            <input onChange={this.handleNameChange} defaultValue={book.name} className='error-message' type='text' id='book-name-input' name='book-name' />
+            <p className='error-message'>Enter a name</p>
+          </div>
+      } else {
+        nameInput =
+          <input onChange={this.handleNameChange} defaultValue={book.name} type='text' id='book-name-input' name='book-name' />
+      }
+      if(this.state.descError){
+        descInput = 
+        <div>
+          <textarea onChange={this.handleDescriptionChange} defaultValue={book.description} className='error-message' id='book-description-input' name='book-description' />
+          <p className='error-message'>Enter description</p>
+        </div>
+      } else {
+        descInput = 
+          <textarea onChange={this.handleDescriptionChange} defaultValue={book.description} id='book-description-input' name='book-description' />
+      }
+      if(this.state.folderError){
+        optionInput = 
+        <div>
+          <select id='book-folder-select' onChange={this.handleFolderIdChange} name='book-folder-id'>
+            <option key={folder.id} value={folder.id}>{folder.name}</option>
+              {folders.map(folder =>
+                <option key={folder.id} value={folder.id}>
+                  {folder.name}
+                </option>
+              )}
+          </select>
+        <p className='error-message'>Select a folder</p>
+        </div>
+          } else {
+            optionInput = 
+            <select id='book-folder-select' onChange={this.handleFolderIdChange} name='book-folder-id'>
+            <option key={folder.id} value={folder.id}>{folder.name}</option>
+              {folders.map(folder =>
+                <option key={folder.id} value={folder.id}>
+                  {folder.name}
+                </option>
+              )}
+          </select>
+          }
+    } 
+    return (
+      <div>
+        {inputForPage.props.children}
+      </div>
+      
     )
   }
 }

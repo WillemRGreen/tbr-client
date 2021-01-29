@@ -38,6 +38,18 @@ const ApiService = {
           : res.json()
       )
   },
+  getBook(bookId) {
+    return fetch(`${config.API_ENDPOINT}/api/books/${bookId}`, {
+      headers: {
+        'authorization': `bearer ${TokenService.getAuthToken()}`,
+      },
+    })
+      .then(res =>
+        (!res.ok)
+          ? res.json().then(e => Promise.reject(e))
+          : res.json()
+      )
+  },
   postFolder(name) {
     return fetch(`${config.API_ENDPOINT}/api/folders`, {
       method: 'POST',
