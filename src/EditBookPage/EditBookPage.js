@@ -89,51 +89,20 @@ export default class EditBookPage extends Component {
   }
 
   render() {
-    const { books=[] } = this.context
-    const { bookId } = this.props.match.params
+    let { books=[] } = this.context
+    let { bookId } = this.props.match.params
+    let folder = {}
+    let book = {}
+    let folders = {}
     if(bookId){
-      const { folders=[] } = this.context
-      const book = findBook(books, parseInt(bookId)) || { description: '' }
-      const folder = findFolder(folders, parseInt(book.folder_id))
-    }
-    
+      folders = this.context.folders
+      book = findBook(books, parseInt(bookId)) || { description: '' }
+      folder = findFolder(folders, parseInt(book.folder_id))
+    } 
     let nameInput = '';
     let descInput = '';
     let optionInput = '';
     let inputForPage = <div></div>;
-    if(bookId){
-      inputForPage = 
-      <section className='AddBook'>
-        <h2>Edit Book</h2>
-        <GenericForm onSubmit={this.handleSubmit}>
-          <div className='field'>
-            <label htmlFor='book-name-input'>
-              Name
-            </label>
-            {nameInput}
-          </div>
-          <div className='field'>
-            <label htmlFor='book-description-input'>
-              Description
-            </label>
-            {descInput}
-          </div>
-          <div className='field'>
-            <label htmlFor='book-folder-select'>
-              Folder
-            </label>
-            {optionInput}
-          </div>
-          <div className='buttons'>
-            <button type='submit'>
-              Submit Edits
-            </button>
-          </div>
-        </GenericForm>
-      </section>
-    } else {
-      inputForPage = <div>Could not retrieve folder</div>
-    }
     if(bookId){
       if(this.state.nameError){
         nameInput =
@@ -180,6 +149,40 @@ export default class EditBookPage extends Component {
           </select>
           }
     } 
+    if(bookId){
+      inputForPage = 
+      <section className='AddBook'>
+        <h2>Edit Book</h2>
+        <GenericForm onSubmit={this.handleSubmit}>
+          <div className='field'>
+            <label htmlFor='book-name-input'>
+              Name
+            </label>
+            {nameInput}
+          </div>
+          <div className='field'>
+            <label htmlFor='book-description-input'>
+              Description
+            </label>
+            {descInput}
+          </div>
+          <div className='field'>
+            <label htmlFor='book-folder-select'>
+              Folder
+            </label>
+            {optionInput}
+          </div>
+          <div className='buttons'>
+            <button type='submit'>
+              Submit Edits
+            </button>
+          </div>
+        </GenericForm>
+      </section>
+    } else {
+      inputForPage = <div>Could not retrieve folder</div>
+    }
+    
     return (
       <div>
         {inputForPage.props.children}
